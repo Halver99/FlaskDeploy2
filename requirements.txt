@@ -1,0 +1,14 @@
+flask
+Flask
+gunicorn == 20.1.0
+python-dotenv== 0.18.0
+Sastrawi 
+swifter 
+pandas 
+numpy 
+pathlib 
+Matplotlib 
+nltk
+scikit-learn 
+wordcloud 
+regex

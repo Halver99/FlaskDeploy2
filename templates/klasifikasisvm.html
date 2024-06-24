@@ -1,0 +1,295 @@
+
+
+{% include 'header.html' %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Content Row -->
+    <!-- Approach -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-success">Tombol</h6>
+        </div>
+    
+        <div class="card-body">
+            <h2>Reset dan Export</h2>
+            <p>Silahkan klik tombol di bawah ini untuk melakukan reset atau export 
+                hasil prediksi dengan svm. </p>
+    
+            <div class="mt-3 d-flex justify-content-start">
+                <a href="{{ url_for('download_file', filename='df_test.csv') }}" class="btn btn-primary mr-2">Export</a>
+                <form enctype="multipart/form-data" action="/reset" method="POST">
+                    <button type="submit" name="" value="reset" class="btn btn-danger">Reset All</button>
+                </form>
+                
+            </div>
+            <br>
+        </div>
+    </div>
+
+
+<br>
+
+<!-- Table of the test data -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Tabel Aktual dan Prediksi SVM</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>teks</th>
+                                <th>Hasil Sebenarnya</th>
+                                <th>Prediksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for index, row in df_test_subset.iterrows() %}
+                            <tr>
+                                <th scope="row">{{ index }}</th>
+                                <td>{{ row['teks'] }}</td>
+                                <td>{{ row['Hasil sebenarnya'] }}</td>
+                                <td>{{ row['Prediksi'] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Nilai Hasil Klasifikasi SVM</h1>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Accuracy Score</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{accuracy_score_linear}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Precision Score</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{precision_score_linear}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Recall Score</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{recall_score_linear}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                F1 Score</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{f1_score_linear}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Content Row -->
+    </div>
+    <!-- /Content Row -->
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Nilai Hasil Confusion Matriks</h1>
+    </div>
+    <div class="row">
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Aktual Positive</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{tp_linear}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Aktual Negative</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{tn_linear}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Earnings (Monthly) Card Example -->
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Prediksi Positive</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{fp_linear}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-window-close fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Prediksi Negative</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{fn_linear}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-window-close fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /Content Row -->
+    </div>
+
+
+</div>
+<!-- /.container-fluid -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Bootstrap core JavaScript-->
+<script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+<script
+    src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- Core plugin JavaScript-->
+<script
+    src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{{ url_for('static', filename='js/sb-admin-2.min.js') }}"></script>
+
+<!-- Page level plugins -->
+<script src="{{ url_for('static', filename='vendor/chart.js/Chart.min.js') }}"></script>
+<script
+    src="{{ url_for('static', filename='vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script
+    src="{{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{{ url_for('static', filename='js/demo/chart-area-demo.js') }}"></script>
+<script src="{{ url_for('static', filename='js/demo/chart-pie-demo.js') }}"></script>
+<script src="{{ url_for('static', filename='js/demo/datatables-demo.js') }}"></script>
+
+
+<!-- Custom JavaScript for dynamic table -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var form = document.getElementById("svm-form");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission behavior
+
+            fetch("/klasifikasisvm", {
+                method: "POST",
+                body: new FormData(form),
+            })
+            .then(function (response) {
+                return response.text(); // Extract text from the response
+            })
+            .then(function (data) {
+                // Update the dynamic table content
+                document.getElementById("dynamic-table").innerHTML = data;
+            })
+            .catch(function (error) {
+                console.error("Error:", error);
+            });
+        });
+    });
+</script>
+
+
+</body>
+
+</html>

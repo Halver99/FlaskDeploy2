@@ -1,0 +1,71 @@
+{% include 'header.html' %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Word Cloud and Frequency Chart Negatif -->
+        <div class="col-xl-6 col-md-12 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <h6 class="m-0 font-weight-bold text-danger">Word Cloud Negatif</h6>
+                    <img src="{{ negative_wordcloud }}" alt="Word Cloud Negatif" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-12 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <h6 class="m-0 font-weight-bold text-danger">Frekuensi Kata Negatif</h6>
+                    <img src="{{ negative_freq }}" alt="Frekuensi Kata Negatif" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Word Cloud and Frequency Chart Positif -->
+        <div class="col-xl-6 col-md-12 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <h6 class="m-0 font-weight-bold text-success">Word Cloud Positif</h6>
+                    <img src="{{ positive_wordcloud }}" alt="Word Cloud Positif" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-12 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <h6 class="m-0 font-weight-bold text-success">Frekuensi Kata Positif</h6>
+                    <img src="{{ positive_freq }}" alt="Frekuensi Kata Positif" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ url_for('static', filename='js/sb-admin-2.min.js') }}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{ url_for('static', filename='vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ url_for('static', filename='js/demo/datatables-demo.js') }}"></script>
+
+</body>
+
+</html>
